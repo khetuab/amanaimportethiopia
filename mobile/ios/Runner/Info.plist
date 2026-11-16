@@ -75,5 +75,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>telephony</string>
+    </array>
 </dict>
 </plist>
