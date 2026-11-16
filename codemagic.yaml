@@ -1,16 +1,16 @@
 workflows:
   ios-release:
     name: Mobile iOS Release
-    working_directory: mobile          # your Flutter folder
+    working_directory: mobile          
     instance_type: mac_mini_m2
     integrations:
-      app_store_connect: YOUR_INTEGRATION_NAME
+      app_store_connect: Ethio_Apple_Key
     environment:
       flutter: stable
       xcode: latest
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.yourcompany.ethioimport
+        bundle_identifier: com.ethiopia.ethioimport
     triggering:
       events:
         - push
