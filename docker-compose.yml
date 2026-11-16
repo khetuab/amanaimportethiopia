@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: ethio-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./backend
+    container_name: ethio-api
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: 5000
+      API_PREFIX: /api/v1
+      MONGO_URI: mongodb://mongo:27017/ethio_marketplace
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?set JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?set JWT_REFRESH_SECRET}
+      JWT_ACCESS_EXPIRES_IN: 15m
+      JWT_REFRESH_EXPIRES_IN: 7d
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      MANUAL_PAY_CHANNEL: bank_transfer
+      MANUAL_PAY_RECIPIENT_NAME: ${MANUAL_PAY_RECIPIENT_NAME:-Ethio Marketplace PLC}
+      MANUAL_PAY_ACCOUNT: ${MANUAL_PAY_ACCOUNT:-}
+      MANUAL_PAY_BANK: ${MANUAL_PAY_BANK:-}
+    ports:
+      - "5000:5000"
+    volumes:
+      - api-uploads:/app/uploads
+      - api-logs:/app/logs
+
+volumes:
+  mongo-data:
+  api-uploads:
+  api-logs:

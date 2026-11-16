@@ -1,0 +1,48 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Node.js
+node_modules/
+**/node_modules/
+npm-debug.log*
+
+# React / Vite
+dist/
+**/dist/
+build/
+**/build/
+
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+**/.dart_tool/
+**/build/
+**/*.iml
+
+# Android / IDE
+.idea/
+.gradle/
+**/.gradle/
+android/local.properties
+
+# Generated files
+coverage/
+test-results/
+playwright-report/
+**/test-results/
+**/playwright-report/
+
+# Temporary archives
+*.zip
+
+# Operating system
+.DS_Store
+Thumbs.db

@@ -1,4 +1,4 @@
-package com.example.mobile
+package com.ethiopia.ethioimport
 
 import io.flutter.embedding.android.FlutterActivity
 

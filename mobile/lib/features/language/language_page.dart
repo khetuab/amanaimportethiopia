@@ -229,123 +229,121 @@ class _LanguageCard extends StatelessWidget {
     final scheme = theme.colorScheme;
     final controller = Get.find<LanguageController>();
 
-    return AnimatedBuilder(
-      animation: controller.selected,
-      builder: (context, _) {
-        final isSelected = controller.selected.value == language.code;
+    return Obx(() {
+      final isSelected = controller.selected.value == language.code;
 
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(18),
-            onTap: () => controller.select(language.code),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 260),
-              curve: Curves.easeOutCubic,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              decoration: BoxDecoration(
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: () => controller.select(language.code),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 260),
+            curve: Curves.easeOutCubic,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? scheme.primary.withValues(alpha: .07)
+                  : scheme.onSurface.withValues(alpha: .04),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(
                 color: isSelected
-                    ? scheme.primary.withValues(alpha: .07)
-                    : scheme.onSurface.withValues(alpha: .04),
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(
-                  color: isSelected
-                      ? scheme.primary.withValues(alpha: .8)
-                      : scheme.onSurface.withValues(alpha: .12),
-                  width: isSelected ? 1.6 : 1.2,
-                ),
-              ),
-              child: Row(
-                children: [
-                  // Leading tag tile.
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 260),
-                    curve: Curves.easeOutCubic,
-                    width: 46,
-                    height: 46,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? scheme.primary
-                          : scheme.onSurface.withValues(alpha: .07),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Text(
-                      language.tag,
-                      style: TextStyle(
-                        color: isSelected
-                            ? scheme.onPrimary
-                            : scheme.onSurface.withValues(alpha: .7),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  // Native + English names.
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          language.native,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: scheme.onSurface,
-                            fontSize: 16.5,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          language.english,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: scheme.onSurface.withValues(alpha: .55),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Trailing selection indicator.
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 260),
-                    curve: Curves.easeOutCubic,
-                    width: 26,
-                    height: 26,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isSelected ? scheme.primary : Colors.transparent,
-                      border: Border.all(
-                        color: isSelected
-                            ? scheme.primary
-                            : scheme.onSurface.withValues(alpha: .28),
-                        width: 1.6,
-                      ),
-                    ),
-                    child: isSelected
-                        ? Icon(
-                            Icons.check_rounded,
-                            size: 16,
-                            color: scheme.onPrimary,
-                          )
-                        : const SizedBox.shrink(),
-                  ),
-                ],
+                    ? scheme.primary.withValues(alpha: .8)
+                    : scheme.onSurface.withValues(alpha: .12),
+                width: isSelected ? 1.6 : 1.2,
               ),
             ),
+            child: Row(
+              children: [
+                // Leading tag tile.
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 260),
+                  curve: Curves.easeOutCubic,
+                  width: 46,
+                  height: 46,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? scheme.primary
+                        : scheme.onSurface.withValues(alpha: .07),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Text(
+                    language.tag,
+                    style: TextStyle(
+                      color: isSelected
+                          ? scheme.onPrimary
+                          : scheme.onSurface.withValues(alpha: .7),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                // Native + English names.
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        language.native,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: scheme.onSurface,
+                          fontSize: 16.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        language.english,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: scheme.onSurface.withValues(alpha: .55),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Trailing selection indicator.
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 260),
+                  curve: Curves.easeOutCubic,
+                  width: 26,
+                  height: 26,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isSelected ? scheme.primary : Colors.transparent,
+                    border: Border.all(
+                      color: isSelected
+                          ? scheme.primary
+                          : scheme.onSurface.withValues(alpha: .28),
+                      width: 1.6,
+                    ),
+                  ),
+                  child: isSelected
+                      ? Icon(
+                    Icons.check_rounded,
+                    size: 16,
+                    color: scheme.onPrimary,
+                  )
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ),
           ),
-        )
-            .animate(delay: delay)
-            .fadeIn(duration: 450.ms)
-            .slideY(begin: .16, end: 0, curve: Curves.easeOutCubic);
-      },
-    );
+        ),
+      )
+          .animate(delay: delay)
+          .fadeIn(duration: 450.ms)
+          .slideY(begin: .16, end: 0, curve: Curves.easeOutCubic);
+    });
+
   }
 }
 

@@ -10,6 +10,15 @@
 	<string>Mobile</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Used to attach reference images to your requests.</string>
+<key>NSCameraUsageDescription</key>
+<string>Used to photograph product references and evidence.</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
