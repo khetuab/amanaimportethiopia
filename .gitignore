@@ -43,6 +43,8 @@ playwright-report/
 # Temporary archives
 *.zip
 
+codemagic_cert_key
+codemagic_cert_key.pub
 # Operating system
 .DS_Store
 Thumbs.db
