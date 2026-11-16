@@ -7,6 +7,8 @@ workflows:
     integrations:
       app_store_connect: "App Store Connect Key"
     environment:
+      groups:
+        - app_env
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -18,6 +20,9 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
+      - name: Create .env file
+        script: |
+          echo "$ENV_FILE_BASE64" | base64 --decode > .env
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
