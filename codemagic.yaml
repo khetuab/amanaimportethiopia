@@ -3,12 +3,10 @@ workflows:
     name: iOS Release
     max_build_duration: 60
     instance_type: mac_mini_m2
-    working_directory: mobile         
+    working_directory: mobile
     integrations:
-      app_store_connect: K9Z6S6D4YM
+      app_store_connect: "App Store Connect Key"
     environment:
-      groups:
-        - ios_credentials
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -16,7 +14,7 @@ workflows:
         distribution_type: app_store
         bundle_identifier: com.ethiopia.ethioimport
       vars:
-        APP_STORE_APPLE_ID: 6835421184     
+        APP_STORE_APPLE_ID: 6835421184
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
