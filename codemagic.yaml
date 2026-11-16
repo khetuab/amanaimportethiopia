@@ -1,0 +1,36 @@
+workflows:
+  ios-release:
+    name: Mobile iOS Release
+    working_directory: mobile          # your Flutter folder
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: YOUR_INTEGRATION_NAME
+    environment:
+      flutter: stable
+      xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.yourcompany.ethioimport
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Set up signing
+        script: keychain initialize
+      - name: Get packages
+        script: flutter pub get
+      - name: Apply signing profiles
+        script: |
+          keychain add-certificates
+          xcode-project use-profiles
+      - name: Build IPA
+        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - mobile/build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
